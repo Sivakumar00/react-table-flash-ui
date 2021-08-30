@@ -2,3 +2,4 @@ node_modules
 dist
 reactComponentLib
 stories
+rollup.config.js

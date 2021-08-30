@@ -1,98 +1,81 @@
 {
-    "extends": [
-      "airbnb",
-      "airbnb/hooks",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "plugin:prettier/recommended",
-      "prettier",
-      "prettier/@typescript-eslint",
-      "prettier/react"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json",
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 11,
-      "sourceType": "module"
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "ignorePatterns": [
+    "dist/*",
+    "node_modules/*",
+    "**/*.html",
+    "jest.config.js",
+    "commitlint.config.js"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "env": {
-      "browser": true,
-      "jest": true
-    },
-    "plugins": [
-      "prettier",
-      "jest"
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "no-nested-ternary": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
     ],
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "extensions": [
-            ".js",
-            ".jsx",
-            ".ts",
-            ".tsx"
-          ]
-        }
-      },
-      "import/parsers": {
-        "@typescript-eslint/parser": [
-          ".ts",
-          ".tsx"
+    "no-shadow":"off",
+    "import/prefer-default-export": "off",
+    "react/state-in-constructor": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "./src/setupTests.ts",
+          "**/*.test.tsx",
+          "**/*.test.ts",
+          "**/*.stories.tsx"
         ]
       }
+    ],
+    "no-underscore-dangle": "off",
+
+    "no-param-reassign": 0,
+    "prefer-object-spread":0,
+    "import/no-unresolved": "error",
+    "import/extensions": [0],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-one-expression-per-line": [0],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx"]
+      }
+    ],
+    "camelcase": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".ts",
-            ".tsx"
-          ]
-        }
-      ],
-      "import/prefer-default-export": "off",
-      "react/no-find-dom-node": 0,
-      "class-methods-use-this": "off",
-      "react/react-in-jsx-scope": "off",
-      "jsx-a11y/anchor-is-valid": [
-        "error",
-        {
-          "components": [
-            "Link"
-          ],
-          "specialLink": [
-            "to",
-            "hrefLeft",
-            "hrefRight"
-          ],
-          "aspects": [
-            "noHref",
-            "invalidHref",
-            "preferButton"
-          ]
-        }
-      ],
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "js": "never",
-          "jsx": "never",
-          "ts": "never",
-          "tsx": "never"
-        }
-      ]
-    },
-    "ignorePatterns": [
-      "node_modules/*",
-      "**/*.html",
-      "jest.config.js",
-      "commitlint.config.js"
-    ]
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
   }
+}
