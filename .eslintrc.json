@@ -3,13 +3,7 @@
     "browser": true,
     "es2020": true
   },
-  "ignorePatterns": [
-    "dist/*",
-    "node_modules/*",
-    "**/*.html",
-    "jest.config.js",
-    "commitlint.config.js"
-  ],
+  "ignorePatterns": ["dist/*", "node_modules/*", "**/*.html", "jest.config.js", "commitlint.config.js"],
   "extends": [
     "plugin:react/recommended",
     "airbnb",
@@ -36,7 +30,7 @@
         "allow": ["warn", "error"]
       }
     ],
-    "no-shadow":"off",
+    "no-shadow": "off",
     "import/prefer-default-export": "off",
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
@@ -44,18 +38,13 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "./src/test/setupTests.ts",
-          "**/*.test.tsx",
-          "**/*.test.ts",
-          "**/*.stories.tsx"
-        ]
+        "devDependencies": ["./src/test/setupTests.ts", "**/*.test.tsx", "**/*.test.ts", "**/*.stories.tsx"]
       }
     ],
     "no-underscore-dangle": "off",
 
     "no-param-reassign": 0,
-    "prefer-object-spread":0,
+    "prefer-object-spread": 0,
     "import/no-unresolved": "error",
     "import/extensions": [0],
     "react/react-in-jsx-scope": "off",
@@ -63,14 +52,22 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".tsx"]
+        "extensions": [".tsx", ".ts", ".js", ".jsx"]
       }
     ],
-    "camelcase": "off"
+    "camelcase": "off",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "object": null
+        }
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx", ".js", ".jsx"]
     },
     "import/resolver": {
       "typescript": {

@@ -1,3 +1,3 @@
-import { TestComponent } from '@components/TestComponent/TestComponent';
+import Table from '@components/Table/Table';
 
-export { TestComponent };
+export { Table };
