@@ -30,16 +30,19 @@ export const columns = [
         Header: 'Phone',
         accessor: 'phone',
         align: 'right',
+        width: 200,
       },
       {
         Header: 'Email',
         accessor: 'email',
+        width: 200,
       },
       {
         Header: 'Website',
         accessor: 'website',
       },
     ],
+    align: 'center',
   },
 ];
 
