@@ -1,43 +1,57 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { TableOptions, useTable } from 'react-table';
+import { TableOptions, useBlockLayout, useResizeColumns, useTable } from 'react-table';
+import { CSSProperties } from 'styled-components';
+import '../../style/react-table.css';
 
 export interface TableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
   name?: string;
+  headerStyle?: CSSProperties;
 }
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
   const { columns, data } = props;
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
-    columns,
-    data,
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    {
+      columns,
+      data,
+    },
+    useBlockLayout,
+    useResizeColumns,
+  );
 
   // Render the UI for your table
   return (
-    <table {...getTableProps()}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => (
-                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+    <div>
+      <div {...getTableProps()} className="rtw-table">
+        <div>
+          {headerGroups.map((headerGroup) => (
+            <div {...headerGroup.getHeaderGroupProps()} className="rtw-thead">
+              {headerGroup.headers.map((column) => (
+                <div {...column.getHeaderProps()} className="rtw-th">
+                  {column.render('Header')}
+                </div>
               ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+            </div>
+          ))}
+        </div>
+
+        <div {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <div {...row.getRowProps()} className="rtw-tr">
+                {row.cells.map((cell) => (
+                  <div {...cell.getCellProps()} className="rtw-td">
+                    {cell.render('Cell')}
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };
 
