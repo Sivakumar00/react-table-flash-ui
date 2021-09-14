@@ -47,6 +47,8 @@ body {
 .rtw-table {
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 20px;
+    float: left;
 }
 
 .rtw-thead {
@@ -88,11 +90,16 @@ body {
 .rtw-resizer {
     display: inline-block;
     background: #eaeaea;
-    width: 1.5px;
+    width: 1px;
     height: 70%;
     position: absolute;
     right: 0;
     top: 6px;
     transform: translateX(50%);
     z-index: 1;
+}
+
+.rwt-sortIcon{
+    margin-left: 10px;
+    font-size: 14px;
 }

@@ -4,6 +4,12 @@ export interface IUserData extends Faker.UserCard, Record<string, unknown> {
   subRows?: IUserData[];
 }
 
+export const defaultColumn = {
+  minWidth: 30,
+  width: 150,
+  maxWidth: 400,
+}
+
 export const columns = [
   {
     Header: 'Name',
@@ -11,12 +17,14 @@ export const columns = [
       {
         Header: 'Name',
         accessor: 'name',
+        disableSortBy: true,
       },
       {
         Header: 'User Name',
         accessor: 'username',
       },
     ],
+    disableResizing: true,
   },
   {
     Header: 'Info',
@@ -24,12 +32,10 @@ export const columns = [
       {
         Header: 'City',
         accessor: 'address.city',
-        align: 'left',
       },
       {
         Header: 'Phone',
         accessor: 'phone',
-        align: 'right',
         width: 200,
       },
       {
@@ -40,9 +46,10 @@ export const columns = [
       {
         Header: 'Website',
         accessor: 'website',
+        disableResizing: true,
       },
     ],
-    align: 'center',
+    disableResizing: true,
   },
 ];
 
