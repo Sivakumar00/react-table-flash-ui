@@ -18,36 +18,11 @@ export interface TableProperties<T extends Record<string, unknown>> extends Tabl
   disableSort?: boolean;
 }
 
-// interface IIndeterminateInputProps {
-//   indeterminate?: boolean;
-//   name?: string;
-// }
-
 interface ITableToggleProps {
   getToggleAllRowsSelectedProps: (
     props?: Partial<TableToggleAllRowsSelectedProps> | undefined,
   ) => TableToggleAllRowsSelectedProps;
 }
-
-// const IndeterminateCheckbox = forwardRef<
-//   HTMLInputElement,
-//   IIndeterminateInputProps
-//   // eslint-disable-next-line react/prop-types
-// >(({ indeterminate, ...rest }, ref: React.Ref<HTMLInputElement>) => {
-//   const defaultRef = useRef(null);
-//   const resolvedRef = ref || defaultRef;
-
-//   useEffect(() => {
-//     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-//     resolvedRef.current.indeterminate = indeterminate;
-//   }, [resolvedRef, indeterminate]);
-
-//   return (
-//     <>
-//       <input type="checkbox" ref={resolvedRef} {...rest} />
-//     </>
-//   );
-// });
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
