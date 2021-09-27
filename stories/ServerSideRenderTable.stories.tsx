@@ -1,7 +1,7 @@
 import { ServerSideRenderTable, Table } from '@src/index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
-import generateMock, { columns } from './__mocks__/generateMock';
+import generateMock, { columns, defaultColumn } from './__mocks__/generateMock';
 
 export default {
     title: 'Tables/ServerSideRender Table',
@@ -11,14 +11,15 @@ export default {
 
 
 const RenderTable: ComponentStory<typeof Table> = (args) => {
-    const count = 40
-    const [items, setItems] = useState(generateMock(15));
+    const count = 60
+    const [items, setItems] = useState(generateMock(20));
     const [hasMore, setHasMore] = useState(true);
+    const gridHeight = '440px'
 
     const fetchMoreData = () => {
         setTimeout(() => {
-            setItems(items.concat(generateMock(5)));
-            if (items.length >= 40) {
+            setItems(items.concat(generateMock(15)));
+            if (items.length >= 60) {
                 setHasMore(false)
             }
         }, 500);
@@ -26,8 +27,30 @@ const RenderTable: ComponentStory<typeof Table> = (args) => {
 
     const data = items;
 
-    return <ServerSideRenderTable columns={columns} data={data} fetchNextItem={fetchMoreData} hasNext={hasMore} totalCount={count} />;
+    return <ServerSideRenderTable columns={columns} data={data} fetchNextItem={fetchMoreData} hasNext={hasMore} totalCount={count} gridHeight={gridHeight} />;
+
+}
+
+const ResizeServerTable: ComponentStory<typeof Table> = (args) => {
+    const count = 60
+    const [items, setItems] = useState(generateMock(20));
+    const [hasMore, setHasMore] = useState(true);
+    const gridHeight = '440px'
+
+    const fetchMoreData = () => {
+        setTimeout(() => {
+            setItems(items.concat(generateMock(15)));
+            if (items.length >= 60) {
+                setHasMore(false)
+            }
+        }, 500);
+    };
+
+    const data = items;
+
+    return <ServerSideRenderTable columns={columns} data={data} fetchNextItem={fetchMoreData} hasNext={hasMore} totalCount={count} gridHeight={gridHeight} resize={true} />;
 
 }
 
 export const ServerSideRender = RenderTable.bind({});
+export const ResizableServerTable = ResizeServerTable.bind({});

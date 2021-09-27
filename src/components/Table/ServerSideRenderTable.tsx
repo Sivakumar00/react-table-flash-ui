@@ -1,4 +1,4 @@
-import { useTable, useSortBy, useBlockLayout, TableOptions } from 'react-table';
+import { useTable, useSortBy, useBlockLayout, TableOptions, useResizeColumns } from 'react-table';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { useSticky } from 'react-table-sticky';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
@@ -12,13 +12,14 @@ export interface ServerTableProperties<T extends Record<string, unknown>> extend
   fetchNextItem: (startIndex: number, endIndex: number) => Promise<void> | void;
   hasNext: boolean;
   totalCount: number;
+  gridHeight: string;
 }
 
 const ServerSideRenderTable = <T extends Record<string, unknown>>(
   props: PropsWithChildren<ServerTableProperties<T>>,
 ): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
-  const { columns, fetchNextItem, hasNext, data, totalCount } = props;
+  const { columns, fetchNextItem, hasNext, data, totalCount, gridHeight, resize } = props;
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
       columns,
@@ -26,6 +27,7 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
     },
     useSortBy,
     useBlockLayout,
+    useResizeColumns,
     useSticky,
   );
 
@@ -40,7 +42,6 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
           })}
           className="rtw-tr"
         >
-          <div className="rtw-td">{index + 1}</div>
           {row.cells.map((cell) => (
             <div {...cell.getCellProps()} className="rtw-td">
               {cell.render('Cell')}
@@ -69,12 +70,18 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
                 {column.isSorted && (
                   <span className="rwt-sortIcon">{column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : ''}</span>
                 )}
+                {resize && (
+                  <div
+                    {...(column.canResize ? column.getResizerProps() : {})}
+                    className={`${column.canResize ? 'rtw-resizer' : ''}`}
+                  />
+                )}
               </div>
             ))}
           </div>
         ))}
       </div>
-      <div {...getTableBodyProps()} className="rtw-table-body">
+      <div {...getTableBodyProps()} className="rtw-table-body" style={{ height: gridHeight }}>
         {rows.length ? (
           <AutoSizer>
             {({ width, height }) => (
