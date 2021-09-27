@@ -1,6 +1,4 @@
 import { helpers } from 'faker';
-import { useMemo, useState } from 'react';
-
 export interface IUserData extends Faker.UserCard, Record<string, unknown> {
   subRows?: IUserData[];
 }
