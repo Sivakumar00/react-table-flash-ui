@@ -1,31 +1,8 @@
+import { ITableToggleProps, TableProperties } from '@src/types';
 import { PropsWithChildren, ReactElement } from 'react';
-import {
-  TableOptions,
-  useBlockLayout,
-  useResizeColumns,
-  useRowSelect,
-  useSortBy,
-  useTable,
-  TableToggleAllRowsSelectedProps,
-  Row,
-} from 'react-table';
+import { useBlockLayout, useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup } from 'react-table';
 import '../../style/react-table.css';
 import IndeterminateCheckbox from './IndeterminateCheckbox';
-
-export interface TableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
-  name?: string;
-  resize?: boolean;
-  disableSort?: boolean;
-  fetchNextItem?: (startIndex: number, endIndex: number) => Promise<void> | void;
-  hasNext?: boolean;
-  totalCount?: number;
-}
-
-interface ITableToggleProps {
-  getToggleAllRowsSelectedProps: (
-    props?: Partial<TableToggleAllRowsSelectedProps> | undefined,
-  ) => TableToggleAllRowsSelectedProps;
-}
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
@@ -69,31 +46,36 @@ const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<Table
     },
   );
 
+  const Column = ({ ...column }: HeaderGroup<T>) => (
+    <div {...column.getHeaderProps(column.getSortByToggleProps())} className="rtw-th">
+      {column.render('Header')}
+      {column.isSorted && (
+        <span className="rwt-sortIcon">{column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : ''}</span>
+      )}
+      {resize && (
+        <div
+          {...(column.canResize ? column.getResizerProps() : {})}
+          className={`${column.canResize ? 'rtw-resizer' : ''}`}
+        />
+      )}
+    </div>
+  );
+
+  const Header = () => (
+    <>
+      {headerGroups.map((headerGroup) => (
+        <div {...headerGroup.getHeaderGroupProps()} className="rtw-thead">
+          {headerGroup.headers.map((column) => Column(column))}
+        </div>
+      ))}
+    </>
+  );
+
   // Render the UI for your table
   return (
     <div>
       <div {...getTableProps()} className="rtw-table">
-        <div>
-          {headerGroups.map((headerGroup) => (
-            <div {...headerGroup.getHeaderGroupProps()} className="rtw-thead">
-              {headerGroup.headers.map((column) => (
-                <div {...column.getHeaderProps(column.getSortByToggleProps())} className="rtw-th">
-                  {column.render('Header')}
-                  {column.isSorted && (
-                    <span className="rwt-sortIcon">{column.isSorted ? (column.isSortedDesc ? '↓' : '↑') : ''}</span>
-                  )}
-                  {resize && (
-                    <div
-                      {...(column.canResize ? column.getResizerProps() : {})}
-                      className={`${column.canResize ? 'rtw-resizer' : ''}`}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-
+        {Header()}
         <div {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
