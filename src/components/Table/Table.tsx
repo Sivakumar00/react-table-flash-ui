@@ -16,6 +16,9 @@ export interface TableProperties<T extends Record<string, unknown>> extends Tabl
   name?: string;
   resize?: boolean;
   disableSort?: boolean;
+  fetchNextItem?: (startIndex: number, endIndex: number) => Promise<void> | void;
+  hasNext?: boolean;
+  totalCount?: number;
 }
 
 interface ITableToggleProps {

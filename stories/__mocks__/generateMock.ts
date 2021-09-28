@@ -1,5 +1,4 @@
 import { helpers } from 'faker';
-
 export interface IUserData extends Faker.UserCard, Record<string, unknown> {
   subRows?: IUserData[];
 }
