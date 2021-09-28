@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactElement, useMemo } from 'react';
 import { TableOptions, useBlockLayout, useResizeColumns, useTable } from 'react-table';
 import '../../style/react-table.css';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
+import { scrollbarWidth } from '@src/utils/Utils';
 
 export interface TableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
   name?: string;
@@ -14,15 +15,6 @@ const VirtualizedRowTable = <T extends Record<string, unknown>>(
 ): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
   const { columns, data, resize, defaultColumn } = props;
-
-  const scrollbarWidth = () => {
-    const scrollDiv = document.createElement('div');
-    scrollDiv.setAttribute('style', 'width: 100px; height: 100px; overflow: scroll; position:absolute; top:-9999px;');
-    document.body.appendChild(scrollDiv);
-    const scrollbarWidthSide: number = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    document.body.removeChild(scrollDiv);
-    return scrollbarWidthSide;
-  };
 
   const scrollBarSize: number = useMemo(() => scrollbarWidth(), []);
 
