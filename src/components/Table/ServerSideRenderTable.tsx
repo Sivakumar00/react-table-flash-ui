@@ -33,11 +33,11 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
 
   const RenderRow = ({ index, style }: ListChildComponentProps): JSX.Element => {
     const row = rows[index];
-    prepareRow(row);
     if (row) {
+      prepareRow(row);
       return (
         <div
-          {...row.getRowProps({
+          {...row?.getRowProps({
             style,
           })}
           className="rtw-tr"
@@ -82,7 +82,7 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
         ))}
       </div>
       <div {...getTableBodyProps()} className="rtw-table-body" style={{ height: gridHeight }}>
-        {rows.length ? (
+        {rows?.length ? (
           <AutoSizer>
             {({ width, height }) => (
               <InfiniteLoader isItemLoaded={isItemLoaded} itemCount={totalCount} loadMoreItems={fetchNextItem}>
@@ -94,9 +94,7 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
                     width={width}
                     itemCount={totalCount}
                     itemSize={35}
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     onItemsRendered={onItemsRendered}
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     ref={ref}
                   >
                     {RenderRow}

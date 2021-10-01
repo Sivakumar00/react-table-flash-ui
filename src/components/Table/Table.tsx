@@ -2,7 +2,7 @@ import { ITableToggleProps, TableProperties } from '@src/types';
 import { PropsWithChildren, ReactElement } from 'react';
 import { useBlockLayout, useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup } from 'react-table';
 import '../../style/react-table.css';
-import IndeterminateCheckbox from './IndeterminateCheckbox';
+import IndeterminateCheckbox from '../../common/IndeterminateCheckbox';
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
@@ -77,18 +77,19 @@ const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<Table
       <div {...getTableProps()} className="rtw-table">
         {Header()}
         <div {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <div {...row.getRowProps()} className="rtw-tr">
-                {row.cells.map((cell) => (
-                  <div {...cell.getCellProps()} className="rtw-td">
-                    {cell.render('Cell')}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          {rows &&
+            rows.map((row) => {
+              prepareRow(row);
+              return (
+                <div {...row?.getRowProps()} className="rtw-tr">
+                  {row.cells.map((cell) => (
+                    <div {...cell.getCellProps()} className="rtw-td">
+                      {cell.render('Cell')}
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

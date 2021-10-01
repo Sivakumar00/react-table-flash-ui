@@ -30,19 +30,26 @@ const VirtualizedRowTable = <T extends Record<string, unknown>>(
 
   const RenderRow = ({ index, style }: ListChildComponentProps): JSX.Element => {
     const row = rows[index];
-    prepareRow(row);
+    if (row) {
+      prepareRow(row);
+      return (
+        <div
+          {...row.getRowProps({
+            style,
+          })}
+          className="rtw-tr"
+        >
+          {row.cells.map((cell) => (
+            <div {...cell.getCellProps()} className="rtw-td">
+              {cell.render('Cell')}
+            </div>
+          ))}
+        </div>
+      );
+    }
     return (
-      <div
-        {...row.getRowProps({
-          style,
-        })}
-        className="rtw-tr"
-      >
-        {row.cells.map((cell) => (
-          <div {...cell.getCellProps()} className="rtw-td">
-            {cell.render('Cell')}
-          </div>
-        ))}
+      <div style={style} key={index} className="flex items-center my-1">
+        Loading
       </div>
     );
   };
