@@ -11,6 +11,8 @@ export interface TableProperties<T extends Record<string, unknown>> extends Tabl
   fetchNextItem?: (startIndex: number, endIndex: number) => Promise<void> | void;
   hasNext?: boolean;
   totalCount?: number;
+  gridHeight?: number | string;
+  stickyHeader?: boolean;
 }
 
 export interface ITableToggleProps {

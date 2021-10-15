@@ -1,4 +1,4 @@
-import { useTable, useSortBy, useBlockLayout, TableOptions, useResizeColumns } from 'react-table';
+import { useTable, useSortBy, TableOptions, useResizeColumns, useFlexLayout } from 'react-table';
 import InfiniteLoader from 'react-window-infinite-loader';
 import { useSticky } from 'react-table-sticky';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
@@ -26,7 +26,7 @@ const ServerSideRenderTable = <T extends Record<string, unknown>>(
       data,
     },
     useSortBy,
-    useBlockLayout,
+    useFlexLayout,
     useResizeColumns,
     useSticky,
   );

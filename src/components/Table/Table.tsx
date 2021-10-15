@@ -1,12 +1,12 @@
 import { ITableToggleProps, TableProperties } from '@src/types';
 import { PropsWithChildren, ReactElement } from 'react';
-import { useBlockLayout, useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup } from 'react-table';
+import { useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup, useFlexLayout } from 'react-table';
 import '../../style/react-table.css';
 import IndeterminateCheckbox from '../../common/IndeterminateCheckbox';
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
-  const { columns, data, defaultColumn, resize, disableSort } = props;
+  const { columns, data, defaultColumn, resize, disableSort, gridHeight, stickyHeader = false } = props;
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
     {
       columns,
@@ -15,7 +15,7 @@ const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<Table
       disableSortBy: disableSort,
     },
     useSortBy,
-    useBlockLayout,
+    useFlexLayout,
     useResizeColumns,
     useRowSelect,
     (hooks) => {
@@ -74,9 +74,9 @@ const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<Table
   // Render the UI for your table
   return (
     <div>
-      <div {...getTableProps()} className="rtw-table">
+      <div {...getTableProps()} className={`rtw-table ${stickyHeader ? 'sticky' : ''}`}>
         {Header()}
-        <div {...getTableBodyProps()}>
+        <div {...getTableBodyProps()} style={gridHeight ? { height: gridHeight, overflow: 'auto' } : {}}>
           {rows &&
             rows.map((row) => {
               prepareRow(row);

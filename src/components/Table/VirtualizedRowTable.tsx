@@ -4,17 +4,18 @@ import '../../style/react-table.css';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { scrollbarWidth } from '@src/utils/Utils';
 
-export interface TableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
+export interface VirtualTableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
   name?: string;
   resize?: boolean;
   disableSort?: boolean;
+  gridHeight?: string | number;
 }
 
 const VirtualizedRowTable = <T extends Record<string, unknown>>(
-  props: PropsWithChildren<TableProperties<T>>,
+  props: PropsWithChildren<VirtualTableProperties<T>>,
 ): ReactElement => {
   // Use the state and functions returned from useTable to build your UI
-  const { columns, data, resize, defaultColumn } = props;
+  const { columns, data, resize, defaultColumn, gridHeight } = props;
 
   const scrollBarSize: number = useMemo(() => scrollbarWidth(), []);
 
@@ -77,7 +78,12 @@ const VirtualizedRowTable = <T extends Record<string, unknown>>(
         </div>
 
         <div {...getTableBodyProps()}>
-          <FixedSizeList height={400} itemCount={rows.length} itemSize={35} width={totalColumnsWidth + scrollBarSize}>
+          <FixedSizeList
+            height={gridHeight || 500}
+            itemCount={rows.length}
+            itemSize={35}
+            width={totalColumnsWidth + scrollBarSize}
+          >
             {RenderRow}
           </FixedSizeList>
         </div>
