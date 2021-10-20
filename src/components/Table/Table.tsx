@@ -1,5 +1,5 @@
-import { ITableToggleProps, TableProperties } from '@src/types';
 import { PropsWithChildren, ReactElement } from 'react';
+import { ITableToggleProps, TableProperties } from '@src/types';
 import { useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup, useFlexLayout } from 'react-table';
 import '../../style/react-table.css';
 import IndeterminateCheckbox from '../../common/IndeterminateCheckbox';
