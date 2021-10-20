@@ -1,8 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { ITableToggleProps, TableProperties } from '@src/types';
 import { useResizeColumns, useRowSelect, useSortBy, useTable, Row, HeaderGroup, useFlexLayout } from 'react-table';
-import '../../style/react-table.css';
-import IndeterminateCheckbox from '../../common/IndeterminateCheckbox';
+import { ITableToggleProps, TableProperties } from '../types';
+import '../style/react-table.css';
+import IndeterminateCheckbox from '../common/IndeterminateCheckbox';
 
 const Table = <T extends Record<string, unknown>>(props: PropsWithChildren<TableProperties<T>>): ReactElement => {
   // Use the state and functions returned from useTable to build your UI

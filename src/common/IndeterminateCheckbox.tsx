@@ -1,6 +1,6 @@
 import { useEffect, forwardRef, useRef, ReactElement } from 'react';
-import useCombinedRefs from '@src/hooks/useCombinedRef';
-import { IInderminateCheckbox } from '@src/types';
+import useCombinedRefs from '../hooks/useCombinedRef';
+import { IInderminateCheckbox } from '../types';
 
 const IndeterminateCheckbox = forwardRef<HTMLInputElement, IInderminateCheckbox>(
   ({ indeterminate, ...rest }: IInderminateCheckbox, ref: React.Ref<HTMLInputElement>): ReactElement => {

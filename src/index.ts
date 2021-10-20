@@ -1,5 +1,5 @@
-import VirtualizedRowTable from '@components/Table/VirtualizedRowTable';
-import Table from '@components/Table/Table';
-import ServerSideRenderTable from '@components/Table/ServerSideRenderTable';
+import VirtualizedRowTable from './components/VirtualizedRowTable';
+import Table from './components/Table';
+import ServerSideRenderTable from './components/ServerSideRenderTable';
 
 export { Table, VirtualizedRowTable, ServerSideRenderTable };

@@ -3,7 +3,7 @@
     "browser": true,
     "es2020": true
   },
-  "ignorePatterns": ["dist/*","mocks/*", "node_modules/*", "**/*.html", "jest.config.js", "commitlint.config.js"],
+  "ignorePatterns": ["dist/*","mocks/*", "node_modules/*", "**/*.html", "jest.config.js", "commitlint.config.js", "src/stories/*"],
   "extends": [
     "plugin:react/recommended",
     "airbnb",

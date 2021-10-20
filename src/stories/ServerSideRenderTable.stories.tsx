@@ -1,4 +1,4 @@
-import { ServerSideRenderTable, Table } from '../src/index';
+import { ServerSideRenderTable, Table } from '../index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 import generateMock, { columns } from './__mocks__/generateMock';
@@ -55,7 +55,7 @@ const ResizeServerTable: ComponentStory<typeof Table> = (args) => {
   const data = items;
 
   return (
-    <div style={{width: '80%'}}>
+    <div style={{ width: '80%' }}>
       <ServerSideRenderTable
         columns={columns}
         data={data}

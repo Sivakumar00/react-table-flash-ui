@@ -1,6 +1,6 @@
-import Table from '@components/Table/Table';
-import generateMock, { columns } from 'stories/__mocks__/generateMock';
+import generateMock, { columns } from '../stories/__mocks__/generateMock';
 import * as ReactDOM from 'react-dom';
+import Table from '../components/Table';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

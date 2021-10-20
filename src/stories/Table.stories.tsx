@@ -1,4 +1,4 @@
-import { Table } from '../src/index';
+import { Table } from '../index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import generateMock, { columns, defaultColumn } from './__mocks__/generateMock';
 
@@ -19,7 +19,9 @@ const DisableSort: ComponentStory<typeof Table> = (args) => (
   <Table data={generateMock(20)} columns={columns} defaultColumn={defaultColumn} disableSort={true} resize={true} />
 );
 
-const TableStickyHeader: ComponentStory<typeof Table> = (args) => <Table data={generateMock(20)} columns={columns} gridHeight={400} stickyHeader />;
+const TableStickyHeader: ComponentStory<typeof Table> = (args) => (
+  <Table data={generateMock(20)} columns={columns} gridHeight={400} stickyHeader />
+);
 
 export const Primary = Template.bind({});
 export const ResizableTable = Resizable.bind({});

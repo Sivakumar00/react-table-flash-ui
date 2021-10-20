@@ -1,8 +1,8 @@
 import { PropsWithChildren, ReactElement, useMemo } from 'react';
 import { TableOptions, useBlockLayout, useResizeColumns, useTable } from 'react-table';
-import '../../style/react-table.css';
+import '../style/react-table.css';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import { scrollbarWidth } from '@src/utils/Utils';
+import { scrollbarWidth } from '../utils/Utils';
 
 export interface VirtualTableProperties<T extends Record<string, unknown>> extends TableOptions<T> {
   name?: string;

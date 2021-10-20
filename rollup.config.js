@@ -20,5 +20,15 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [peerDepsExternal(), resolve(), commonjs(),postcss(), typescript({ useTsconfigDeclarationDir: true })],
+  plugins: [
+    peerDepsExternal(),
+    resolve(),
+    commonjs(),
+    typescript({ useTsconfigDeclarationDir: true }),
+    postcss()
+  ],
+  external: [
+    'react',
+    'react-dom',
+  ],
 };

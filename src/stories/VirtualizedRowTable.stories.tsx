@@ -1,4 +1,4 @@
-import { VirtualizedRowTable, Table } from '@src/index';
+import { VirtualizedRowTable, Table } from '../index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import generateMock, { columns, defaultColumn } from './__mocks__/generateMock';
 

@@ -1,5 +1,6 @@
 node_modules
 dist
 reactComponentLib
-stories
+src/stories/**.stories.tsx
 rollup.config.js
+src/test
