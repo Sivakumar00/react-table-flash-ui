@@ -4,6 +4,7 @@
     "baseUrl": "./",
     "target": "ES5",
     "module": "ESNext",
+    "paths": {},
     "moduleResolution": "node",
     "lib": ["DOM", "ESNext"],
     "jsx": "react-jsx",
